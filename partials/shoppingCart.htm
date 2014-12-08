@@ -1,0 +1,82 @@
+﻿<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+
+            <!-- items -->
+            <table class="table table-bordered">
+
+                <!-- header -->
+                <tr class="well">
+                    <th><b>Item</b></th>
+                    <th><b>Description</b></th>
+                    <th><b>Quantity</b></th>
+                    <th ><b>Item Price</b></th>
+                    <th />
+                </tr>
+
+                <!-- empty cart message -->
+                <tr ng-hide="shopCart.getTotalCount() > 0" >
+                    <td class="tdCenter" colspan="5">
+                        Your cart is empty.
+                    </td>
+                </tr>
+
+                <!-- cart items -->
+                <tr ng-repeat="item in shopCart.items | orderBy:'sku'">
+                    <td>{{item.sku}}</td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.price | currency}}</td>
+                    <td class="tdCenter" title="remove from cart">
+                        <a href="" ng-click="shopCart.removeItem(item.sku)" >
+                            <i class="icon-remove" />
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- footer -->
+                <tr class="well">
+                    <td><b>Total</b></td>
+                    <td colspan="2"></td>
+                    <td><b>{{shopCart.getTotalPrice() | currency}}</b></td>
+                    <td />
+                </tr>
+            </table>
+        </div>
+
+        <!-- buttons -->
+        <div class="span4">
+            <p class="text-info">
+                <button 
+                    class="btn btn-block" 
+                    onclick="window.location.href='default.htm#/store'">
+                    <i class="icon-chevron-left" /> continue shopping
+                </button>
+                <button 
+                    class="btn btn-block btn-danger" 
+                    ng-click="shopCart.clearItems()" 
+                    ng-disabled="shopCart.getTotalCount() < 1" >
+                    <i class="icon-trash icon-white" /> clear cart
+                </button>
+                <button
+                    class="btn btn-block btn-primary"
+                    onclick="window.location.href='default.htm#/ccSubmit'"
+                    ng-disabled="shopCart.getTotalCount() < 1">
+                    <i class="icon-ok icon-white" /> check out using Credit Card
+                </button>
+                <button
+                    class="btn btn-block btn-primary"
+                    ng-click="shopCart.checkout('PayPal')"
+                    ng-disabled="shopCart.getTotalCount() < 1">
+                    <i class="icon-ok icon-white" /> check out using PayPal
+                </button>
+                <button 
+                    class="btn btn-block btn-primary" 
+                    ng-click="shopCart.checkout('Google')" 
+                    ng-disabled="shopCart.getTotalCount() < 1">
+                    <i class="icon-ok icon-white" /> check out using Google
+                </button>
+            </p>
+        </div>
+    </div>
+</div>

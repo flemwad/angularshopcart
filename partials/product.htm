@@ -1,0 +1,50 @@
+﻿<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+
+            <!-- product info -->
+            <table class="table table-bordered">
+
+                <tr class="well">
+                    <td class="tdRight" colspan="3" >
+                        <a href="" ng-click="shopCart.clearItems()" title="clear shopping cart" >
+                            <i class="icon-remove" />
+                        </a>
+                        <a href="default.htm#/shopCart" title="go to shopping shopCart" ng-disabled="shopCart.getTotalCount() < 1"  >
+                            <i class="icon-shopping-cart" />
+                            <b>{{shopCart.getTotalCount()}}</b> items, <b>{{shopCart.getTotalPrice() | currency}}</b>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tdCenter"><img ng-src="img/skuimgs/{{product.sku}}.png" alt="{{product.sku}}" /></td>
+                    <td class="tdCenter"><h2>{{product.description}}</h2></td>
+                    <td class="tdCenter" style="vertical-align:middle" ><span>{{getProdMsg(product)}}</span></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <!-- buttons -->
+        <div class="span4">
+            <button 
+                class="btn btn-block btn-success" 
+                ng-click="shopCart.addItem(product.sku, product.description, product.price, 1)">
+                <i class="icon-shopping-shopCart icon-white" /> add to cart
+            </button>
+            <button 
+                class="btn btn-block btn-danger" 
+                ng-click="shopCart.removeItem(product.sku)"
+                ng-disabled="shopCart.getTotalCount(product.sku) < 1">
+                <i class="icon-trash icon-white" /> remove from cart
+            </button>
+            <button 
+                class="btn btn-block" 
+                onclick="window.location.href='default.htm#/store'">
+                <i class="icon-chevron-left" /> back to store
+            </button>
+        </div>
+    </div>
+</div>
+

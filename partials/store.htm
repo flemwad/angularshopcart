@@ -1,0 +1,52 @@
+﻿<p>
+    Search: <input class="input-medium search-query" ng-model="search">
+</p>
+
+<table class="table table-bordered">
+    <tr class="well">
+        <td><b>Item</b></td>
+        <td><b>Details</b></td>
+        <td><b>Price</b></td>
+        <td style="width:50px;"><b>Quantity</b></td>
+        
+        <td style="width:160px;" class="tdRight">
+            <a href="" ng-click="shopCart.clearItems()" title="clear shopping cart" >
+                <i class="icon-remove" />
+            </a>
+            <a href="default.htm#/shopCart" title="go to shopping cart" ng-disabled="shopCart.getTotalCount() < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{shopCart.getTotalCount()}}</b> items, <b>{{shopCart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+    <tr ng-repeat="product in products | orderBy:'price' | filter:search" >
+        <td>
+            <a href="#/product/{{product.sku}}"><b>{{product.sku}}</b></a>
+        </td>
+        <td>
+            {{product.description}}
+        </td>
+        <td>
+            {{product.price | currency}}
+        </td>
+        <td>
+            <input style="width:30px;" type="number" min="1" max="99" onkeypress='return event.charCode >= 48 && event.charCode <= 57' ng-model="product.quantity" />
+        </td>
+        <td class="tdRight">
+            <a href="" ng-click="shopCart.addItem(product.sku, product.description, product.price, product.quantity)">
+                add product to cart
+            </a>
+        </td>
+    </tr>
+    <tr class="well">
+        <td class="tdRight" colspan="6">
+            <a href="" ng-click="shopCart.clearItems()" title="clear shopping cart" >
+                <i class="icon-remove" />
+            </a>
+            <a href="default.htm#/shopCart" title="go to shopping cart" ng-disabled="shopCart.getTotalCount() < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{shopCart.getTotalCount()}}</b> items, <b>{{shopCart.getTotalPrice() | currency}}</b>
+            </a>
+        </td>
+    </tr>
+</table>

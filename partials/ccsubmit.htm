@@ -1,0 +1,70 @@
+﻿<div class="container-fluid" ng-controller="cardController">
+    <form name="ccForm" novalidate>
+        <label for="name">Name on Card</label>
+        <input name="name" type="text" ng-model="name" tabindex="1" required />
+
+        <br />
+
+        <label for="ccNum">Card Number</label>
+        <input name="ccNum" type="text" ng-model="ccNum" payments-validate="card" payments-format="card" payments-type-model="type" tabindex="2" required />
+
+        <br />
+        
+        <label for="cvc">CVC</label>
+        <input name="cvc" type="text" ng-model="cvc" payments-format="cvc" payments-validate="cvc" payments-type-model="type" tabindex="3" required />
+
+        <br />
+
+        <label for="expiry">Expiration Date</label>
+        <input  name="expiry" 
+                type="text" 
+                ng-model="expiry" 
+                payments-validate="expiry" 
+                payments-format="expiry" 
+                placeholder="mm/yy[yy]"
+                tabindex="4"
+                required />
+
+        <br />
+
+        <div name="cardtypediv">
+            <img id="visa" ng-hide="ccImg == ''" ng-src="{{ccImg}}" alt="type" /> <!--ng-click="selectCard('visa')"-->
+        </div>
+
+        <br />
+
+        whole form errors: {{ccForm.$error}}
+
+        <br />
+
+        whole form invalid: {{ccForm.$invalid}}
+
+        <br />
+
+        card: {{ccForm.ccNum.$card}}
+
+        <br />
+
+        card type: {{type}}
+
+        <div name="btndiv">
+            <button
+                type ="submit"
+                ng-click="submitCart(DataService.shopCart.items)"
+                ng-disabled="ccForm.$invalid"
+                tabindex="5"
+                style="width:100px; float:left; margin-right:10px;"
+                class="btn btn-success" >
+                <i class="icon-ok icon-white" /> pay
+            </button>
+
+            <button
+                style="width:100px; float:left"
+                class="btn btn-block btn-primary"
+                tabindex="6"
+                onclick="window.location.href='default.htm#/shopCart'" >
+            <i class="icon-ok icon-white" /> to cart
+            </button>
+        </div>
+    </form>
+</div>
